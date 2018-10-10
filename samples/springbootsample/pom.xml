@@ -24,8 +24,13 @@
     <dependencies>
         <dependency>
             <groupId>com.alicp.jetcache</groupId>
-            <artifactId>jetcache-starter-redis</artifactId>
+            <artifactId>jetcache-starter-redis-lettuce4</artifactId>
             <version>2.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.gouliao.conf</groupId>
+            <artifactId>nevermore-support</artifactId>
+            <version>0.1.0</version>
         </dependency>
     </dependencies>
 </project>

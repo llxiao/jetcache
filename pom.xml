@@ -154,6 +154,9 @@
         <module>jetcache-starter/jetcache-starter-redis</module>
         <module>jetcache-starter/jetcache-starter-redis-lettuce</module>
         <module>jetcache-starter/jetcache-starter-redis-lettuce4</module>
+
+        <module>samples/springbootsample</module>
+        <module>samples/springsample</module>
     </modules>
 
     <properties>
