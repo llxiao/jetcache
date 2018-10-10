@@ -31,6 +31,7 @@ public class CachePointcut extends StaticMethodMatcherPointcut implements ClassF
         this.basePackages = basePackages;
     }
 
+    @Override
     public boolean matches(Class clazz) {
         boolean b = matchesImpl(clazz);
         logger.trace("check class match {}: {}", b, clazz);

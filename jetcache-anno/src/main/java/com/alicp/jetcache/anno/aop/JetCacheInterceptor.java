@@ -32,6 +32,7 @@ public class JetCacheInterceptor implements MethodInterceptor, ApplicationContex
         this.applicationContext = applicationContext;
     }
 
+    @Override
     public Object invoke(final MethodInvocation invocation) throws Throwable {
         if (globalCacheConfig == null) {
             globalCacheConfig = applicationContext.getBean(GlobalCacheConfig.class);
@@ -48,15 +49,6 @@ public class JetCacheInterceptor implements MethodInterceptor, ApplicationContex
             cac  = cacheConfigMap.getByMethodInfo(key);
         }
 
-        /*
-        if(logger.isTraceEnabled()){
-            logger.trace("JetCacheInterceptor invoke. foundJetCacheConfig={}, method={}.{}(), targetClass={}",
-                    cac != null,
-                    method.getDeclaringClass().getName(),
-                    method.getName(),
-                    invocation.getThis() == null ? null : invocation.getThis().getClass().getName());
-        }
-        */
 
         if (cac == null || cac == CacheInvokeConfig.getNoCacheInvokeConfigInstance()) {
             return invocation.proceed();

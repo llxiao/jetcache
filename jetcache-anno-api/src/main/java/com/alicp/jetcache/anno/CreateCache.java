@@ -64,6 +64,8 @@ public @interface CreateCache {
     int expire() default CacheConsts.UNDEFINED_INT;
 
     /**
+     * 如果缓存类型为cacheType=CacheType.BOTH时,单独指定本地缓存的超时时间
+     *
      * Use to specify the local cache expire time when cacheType=CacheType.BOTH, use "expire" if
      * absent.
      *
