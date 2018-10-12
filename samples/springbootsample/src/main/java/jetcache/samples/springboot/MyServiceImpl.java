@@ -5,6 +5,7 @@ package jetcache.samples.springboot;
 
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CreateCache;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,15 +22,21 @@ public class MyServiceImpl implements MyService {
 
     @Override
     public void createCacheDemo() {
-        cache.put("myKey", "myValue");
-        String myValue = cache.get("myKey");
-        System.out.println("get 'myKey' from cache:" + myValue);
+
     }
 
     @Override
     public void cachedDemo() {
-        userService.loadUser(1);
-        userService.loadUser(1);
+        userService.getUserById(1L);
+        User user = userService.getUserById(1L);
+        System.out.println("origin user=" + user);
+        user.setUserName("99999999");
+        userService.updateUser(user);
+        user = userService.getUserById(1L);
+        System.out.println("update user=" + user);
+        userService.deleteUser(1L);
+        user = userService.getUserById(1L);
+        System.out.println("final user=" + user);
         try {
             Thread.sleep(60000);
         } catch (InterruptedException e) {

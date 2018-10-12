@@ -5,6 +5,7 @@ import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import com.alicp.jetcache.anno.support.GlobalCacheConfig;
 import com.alicp.jetcache.anno.support.SpringConfigProvider;
+import com.alicp.jetcache.embedded.CaffeineCacheBuilder;
 import com.alicp.jetcache.embedded.EmbeddedCacheBuilder;
 import com.alicp.jetcache.embedded.LinkedHashMapCacheBuilder;
 import com.alicp.jetcache.redis.lettuce4.RedisLettuceCacheBuilder;
@@ -53,8 +54,8 @@ public class JetCacheConfig {
     @Bean
     public GlobalCacheConfig config(SpringConfigProvider configProvider, RedisClient redisClient) {
         Map localBuilders = new HashMap();
-        EmbeddedCacheBuilder localBuilder = LinkedHashMapCacheBuilder
-                .createLinkedHashMapCacheBuilder()
+        EmbeddedCacheBuilder localBuilder = CaffeineCacheBuilder
+                .createCaffeineCacheBuilder()
                 .keyConvertor(FastjsonKeyConvertor.INSTANCE);
         localBuilders.put(CacheConsts.DEFAULT_AREA, localBuilder);
 
@@ -73,6 +74,7 @@ public class JetCacheConfig {
         globalCacheConfig.setRemoteCacheBuilders(remoteBuilders);
         globalCacheConfig.setStatIntervalMinutes(15);
         globalCacheConfig.setAreaInCacheName(false);
+
 
         return globalCacheConfig;
     }

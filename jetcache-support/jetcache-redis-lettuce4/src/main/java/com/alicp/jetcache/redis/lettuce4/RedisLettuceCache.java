@@ -26,6 +26,7 @@ import java.util.function.Function;
  *
  * @author <a href="mailto:areyouok@gmail.com">huangli</a>
  */
+@SuppressWarnings("unchecked")
 public class RedisLettuceCache<K, V> extends AbstractExternalCache<K, V> {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisLettuceCache.class);

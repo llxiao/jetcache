@@ -11,12 +11,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserServiceImpl implements UserService {
 
+    private static User user = new User(1L, "李晓");
+
     @Override
-    public User loadUser(long userId) {
-        System.out.println("load user: " + userId);
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserName("user" + userId);
+    public User getUserById(long userId) {
+        System.out.println("load user from database: " + userId);
+
         return user;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        // System.out.println("cache Update" + user);
+    }
+
+    @Override
+    public void deleteUser(long userId) {
+        user = null;
+        // System.out.println("cache delete" + userId);
     }
 }

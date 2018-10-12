@@ -35,7 +35,7 @@ public class JetCacheConfig {
         pc.setMinIdle(2);
         pc.setMaxIdle(10);
         pc.setMaxTotal(10);
-        return new JedisPool(pc, "localhost", 6379);
+        return new JedisPool(pc, "192.168.1.160", 6379,60,"ycc123456",6);
     }
 
     @Bean
@@ -65,7 +65,6 @@ public class JetCacheConfig {
         globalCacheConfig.setRemoteCacheBuilders(remoteBuilders);
         globalCacheConfig.setStatIntervalMinutes(1);
         globalCacheConfig.setAreaInCacheName(false);
-
         return globalCacheConfig;
     }
 }

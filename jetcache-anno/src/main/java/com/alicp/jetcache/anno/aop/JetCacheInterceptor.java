@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContextAware;
 import java.lang.reflect.Method;
 
 /**
+ * <pre>jetcache拦截器</pre>
  * @author <a href="mailto:areyouok@gmail.com">huangli</a>
  */
 public class JetCacheInterceptor implements MethodInterceptor, ApplicationContextAware {
@@ -25,8 +26,13 @@ public class JetCacheInterceptor implements MethodInterceptor, ApplicationContex
 
     private ConfigMap cacheConfigMap;
     private ApplicationContext applicationContext;
+    /**
+     * 全局配置信息
+     */
     GlobalCacheConfig globalCacheConfig;
-
+    /**
+     * 设置context
+     */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
@@ -34,22 +40,29 @@ public class JetCacheInterceptor implements MethodInterceptor, ApplicationContex
 
     @Override
     public Object invoke(final MethodInvocation invocation) throws Throwable {
+
+        //从context 中获取全局配置 如果全局配置为空 或者 只支持方法缓存 则不拦截 直接执行
         if (globalCacheConfig == null) {
             globalCacheConfig = applicationContext.getBean(GlobalCacheConfig.class);
         }
         if (globalCacheConfig == null || !globalCacheConfig.isEnableMethodCache()) {
             return invocation.proceed();
         }
-
+        //获取缓存方法
         Method method = invocation.getMethod();
+        //获取具体的实现类的实例
         Object obj = invocation.getThis();
+        // 获取缓存方法
         CacheInvokeConfig cac = null;
+        //实现类不为空
         if (obj != null) {
+            //key 为方法名 返回值 实现类
+            //jetcache.samples.spring.UserService.loadUser(J)Ljetcache/samples/spring/User;_jetcache.samples.spring.UserServiceImpl
             String key = CachePointcut.getKey(method, obj.getClass());
             cac  = cacheConfigMap.getByMethodInfo(key);
         }
 
-
+        //缓存方法的配置为空 或者 配置没有缓存方法实例 直接执行
         if (cac == null || cac == CacheInvokeConfig.getNoCacheInvokeConfigInstance()) {
             return invocation.proceed();
         }

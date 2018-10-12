@@ -91,6 +91,7 @@ public class CachePointcut extends StaticMethodMatcherPointcut implements ClassF
         return false;
     }
 
+    @Override
     public boolean matches(Method method, Class targetClass) {
         boolean b = matchesImpl(method, targetClass);
         if (b) {

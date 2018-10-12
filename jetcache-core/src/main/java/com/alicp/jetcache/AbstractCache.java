@@ -22,6 +22,7 @@ import java.util.function.Function;
  *
  * @author <a href="mailto:areyouok@gmail.com">huangli</a>
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractCache<K, V> implements Cache<K, V> {
 
     private static Logger logger = LoggerFactory.getLogger(AbstractCache.class);
@@ -72,7 +73,9 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
 //        return false;
         return true;
     }
-
+    /**
+     * cache 事件执行后 通知相关监控在事件执行后进行相关操作
+     */
     public void notify(CacheEvent e) {
         List<CacheMonitor> monitors = config().getMonitors();
         for (CacheMonitor m : monitors) {

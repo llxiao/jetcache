@@ -66,6 +66,7 @@ public class DefaultCacheMonitorManager {
                 statInfo.setStats(stats);
                 time = endTime;
 
+                 // 这里去调用回调的相关统计信息
                 statCallback.accept(statInfo);
             } catch (Exception e) {
                 logger.error("jetcache DefaultCacheMonitorManager error", e);

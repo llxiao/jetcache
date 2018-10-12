@@ -26,6 +26,10 @@ public class StatInfoLogger implements Consumer<StatInfo> {
         this.verboseLog = verboseLog;
     }
 
+    /**
+     * 实现consumer 接口 完成日志统计的打印工作
+     */
+    @Override
     public void accept(StatInfo statInfo) {
         List<CacheStat> stats = statInfo.getStats();
         Collections.sort(stats, (o1, o2) -> {
@@ -46,6 +50,9 @@ public class StatInfoLogger implements Consumer<StatInfo> {
         logger.info(sb.toString());
     }
 
+    /**
+     * 打印统计信息标题部分
+     */
     private StringBuilder logTitle(int initSize, StatInfo statInfo) {
         StringBuilder sb = new StringBuilder(initSize);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss,SSS");
@@ -54,6 +61,9 @@ public class StatInfoLogger implements Consumer<StatInfo> {
         return sb;
     }
 
+    /**
+     * 打印分割符
+     */
     private void printSepLine(StringBuilder sb, String title) {
         title.chars().forEach((c) -> {
             if (c == '|') {
@@ -65,6 +75,9 @@ public class StatInfoLogger implements Consumer<StatInfo> {
         sb.append('\n');
     }
 
+    /**
+     * 打印统计信息
+     */
     private StringBuilder logStatSummary(StatInfo statInfo) {
         StringBuilder sb = logTitle(2048, statInfo);
 
@@ -90,6 +103,9 @@ public class StatInfoLogger implements Consumer<StatInfo> {
         return sb;
     }
 
+    /**
+     * name 格式化 超过最长长度 显示...
+     */
     private String getName(String name) {
         if (name == null) {
             return null;
@@ -102,6 +118,9 @@ public class StatInfoLogger implements Consumer<StatInfo> {
     }
 
 
+    /**
+     * 打印verbose 日志信息
+     */
     private StringBuilder logVerbose(StatInfo statInfo) {
         StringBuilder sb = logTitle(8192, statInfo);
         List<CacheStat> stats = statInfo.getStats();

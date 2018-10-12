@@ -28,4 +28,17 @@ public class User implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public User() {
+    }
+
+    public User(long userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return "User(userId=" + userId + ", userName=" + userName + ")";
+    }
 }

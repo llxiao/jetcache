@@ -7,5 +7,28 @@ package com.alicp.jetcache;
  * @author <a href="mailto:areyouok@gmail.com">huangli</a>
  */
 public enum CacheResultCode {
-    SUCCESS, PART_SUCCESS, FAIL, NOT_EXISTS, EXISTS, EXPIRED
+    /**
+     * 成功
+     */
+    SUCCESS,
+    /**
+     * 部分成功
+     */
+    PART_SUCCESS,
+    /**
+     * 失败
+     */
+    FAIL,
+    /**
+     * 不存在
+     */
+    NOT_EXISTS,
+    /**
+     * 存在
+     */
+    EXISTS,
+    /**
+     * 已失效
+     */
+    EXPIRED
 }
